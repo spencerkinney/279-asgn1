@@ -5,11 +5,25 @@ struct Node {
    struct Node *next;
 };
 struct Node* head = NULL;
-void add(int new_data) {
+
+template<class Object>
+void add(Object x) {
    struct Node* new_node = (struct Node*) malloc(sizeof(struct Node));
-   new_node->data = new_data;
+   new_node->data = x;
    new_node->next = head;
    head = new_node;
+}
+
+template<class Object>
+void remove(Object x) {
+    struct Node* ptr;
+    ptr = head;
+    while (ptr != NULL) {
+        ptr = ptr->next;
+        if (ptr->data == x) {
+            ptr->next = ptr->next->next;
+        }
+    }
 }
 
 void print() {
@@ -45,5 +59,7 @@ int main() {
    print();
    cout << endl;
    cout << "The number of node in this list: " << size() << endl;
+   remove(15);
+   print();
    return 0;
 }
